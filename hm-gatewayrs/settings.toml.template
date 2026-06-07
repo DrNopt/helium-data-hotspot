@@ -7,10 +7,3 @@ timestamp = false
 
 [update]
 enabled = false
-
-[network]
-transport = "quic"
-
-[[helium_network.routers]]
-uri = "helium-router.oracle.helium.io:8080"
-pubkey = "1SbEYKju337P6aYsRd9DT2k4qgK5ZZnbCHHNVKaSHAeCPZSAEH"
