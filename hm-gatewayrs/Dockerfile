@@ -8,7 +8,6 @@ ARG SYSTEM_TIMEZONE
 ARG GATEWAY_RS_RELEASE
 ENV GATEWAY_RS_RELEASE $GATEWAY_RS_RELEASE
 
-# Install dependencies
 RUN \
     apt-get update && \
     DEBIAN_FRONTEND="noninteractive" \
@@ -18,18 +17,19 @@ RUN \
         python3 \
         ca-certificates \
         tar \
+        i2c-tools \
         --no-install-recommends && \
         apt-get autoremove -y && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
 
-# Download and install helium gateway-rs
 RUN wget https://github.com/helium/gateway-rs/releases/download/"$GATEWAY_RS_RELEASE"/helium-gateway-"${GATEWAY_RS_RELEASE#v}"-aarch64-unknown-linux-musl.tar.gz && \
     tar -xzf helium-gateway-"${GATEWAY_RS_RELEASE#v}"-aarch64-unknown-linux-musl.tar.gz && \
     mv helium_gateway /usr/bin/helium_gateway && \
+    mkdir -p /etc/helium_gateway && \
+    mv settings.toml /etc/helium_gateway/default.toml && \
     rm helium-gateway-*.tar.gz
 
-# Copy start script and settings file
 COPY start-gatewayrs.sh .
 COPY settings.toml.template /etc/helium_gateway/settings.toml.template
 
