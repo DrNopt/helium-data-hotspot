@@ -20,6 +20,10 @@ echo 'keypair = "/var/data/gateway_key.bin"' >> settings.toml
 cat /etc/helium_gateway/settings.toml.template >> settings.toml
 cp settings.toml /etc/helium_gateway/settings.toml
 
+echo "=== settings.toml contents ==="
+cat /etc/helium_gateway/settings.toml
+echo "=============================="
+
 echo "Calling helium_gateway server ..."
 /usr/bin/helium_gateway -c /etc/helium_gateway server &
 
