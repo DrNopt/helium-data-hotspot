@@ -1,21 +1,23 @@
 version: '2'
 services:
   packet-forwarder:
-    build: ./hm-pktfwd
+    image: xoseperez/basicstation:latest
     depends_on:
       - helium-miner
     restart: always
     privileged: true
+    network_mode: host
     volumes:
       - pktfwdr:/var/pktfwd
-      - /sys:/sys
-    devices:
-      - /dev/spidev0.0:/dev/spidev0.0
-      - /dev/spidev0.1:/dev/spidev0.1
-      - /dev/gpiomem:/dev/gpiomem
-      - /dev/gpiochip0:/dev/gpiochip0
     environment:
-      - FIRMWARE_VERSION=v1.0.0-alpha.21
+      - MODEL=RAK2287
+      - INTERFACE=SPI
+      - DEVICE=/dev/spidev0.0
+      - RESET_GPIO=17
+      - GPIO_CHIP=gpiochip0
+      - SERVER=helium-miner
+      - PORT=1680
+      - PROTOCOL=semtech-udp
   helium-miner:
     build: ./hm-gatewayrs
     privileged: true
@@ -33,7 +35,7 @@ services:
       - /dev/i2c-1:/dev/i2c-1
     restart: on-failure
     environment:
-      - RELEASE_BUMPER=foobar2
+      - RELEASE_BUMPER=foobar3
       - FIRMWARE_VERSION=v1.0.0-alpha.21
     labels:
       io.balena.features.balena-api: '1'
