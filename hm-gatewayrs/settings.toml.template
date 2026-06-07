@@ -7,3 +7,6 @@ timestamp = false
 
 [update]
 enabled = false
+
+[config]
+endpoint = "https://config.iot.mainnet.helium.io:6080"
