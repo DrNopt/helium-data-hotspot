@@ -11,8 +11,11 @@ services:
       - MODEL=RAK2287
       - INTERFACE=SPI
       - DEVICE=/dev/spidev0.0
-      - RESET_GPIO=17
+      - RESET_GPIO=25
       - GPIO_CHIP=gpiochip0
+      - POWER_EN_GPIO=18
+      - POWER_EN_LOGIC=1
+      - HAS_GPS=0
       - SERVER_HOST=127.0.0.1
       - SERVER_PORT=1680
   helium-miner:
@@ -28,7 +31,7 @@ services:
       - /dev/i2c-1:/dev/i2c-1
     restart: on-failure
     environment:
-      - RELEASE_BUMPER=foobar4
+      - RELEASE_BUMPER=foobar5
       - FIRMWARE_VERSION=v1.0.0-alpha.21
     labels:
       io.balena.features.balena-api: '1'
