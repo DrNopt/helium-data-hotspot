@@ -23,17 +23,12 @@ echo "=== settings.toml contents ==="
 cat /etc/helium_gateway/settings.toml
 echo "=============================="
 
-echo "=== helium_gateway version ==="
-/usr/bin/helium_gateway --version
-echo "=== helium_gateway help ==="
-/usr/bin/helium_gateway --help
-
 echo "Calling helium_gateway server ..."
-/usr/bin/helium_gateway -c /etc/helium_gateway server &
+/usr/bin/helium_gateway -c /etc/helium_gateway/settings.toml server &
 
 sleep 5
 echo "Checking key info..."
-if ! PUBLIC_KEYS=$(/usr/bin/helium_gateway -c /etc/helium_gateway key info)
+if ! PUBLIC_KEYS=$(/usr/bin/helium_gateway -c /etc/helium_gateway/settings.toml key info)
 then
   echo "Can't get miner key info"
 else
