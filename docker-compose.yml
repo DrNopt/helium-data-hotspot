@@ -1,47 +1,37 @@
 version: '2'
 services:
   packet-forwarder:
-    image: xoseperez/basicstation:latest
+    image: rakwireless/udp-packet-forwarder:latest
     depends_on:
       - helium-miner
     restart: always
     privileged: true
     network_mode: host
-    volumes:
-      - pktfwdr:/var/pktfwd
     environment:
       - MODEL=RAK2287
       - INTERFACE=SPI
       - DEVICE=/dev/spidev0.0
       - RESET_GPIO=17
       - GPIO_CHIP=gpiochip0
-      - SERVER=127.0.0.1
-      - PORT=1680
-      - PROTOCOL=semtech-udp
-      - USE_CUPS=0
+      - SERVER_HOST=127.0.0.1
+      - SERVER_PORT=1680
   helium-miner:
     build: ./hm-gatewayrs
     privileged: true
     network_mode: host
-    expose:
-      - "1680"
-    ports:
-      - "44158:44158/tcp"
     volumes:
       - miner-storage:/var/data
       - miner-log:/var/log/miner
-      - pktfwdr:/var/pktfwd
     cap_add:
       - SYS_RAWIO
     devices:
       - /dev/i2c-1:/dev/i2c-1
     restart: on-failure
     environment:
-      - RELEASE_BUMPER=foobar3
+      - RELEASE_BUMPER=foobar4
       - FIRMWARE_VERSION=v1.0.0-alpha.21
     labels:
       io.balena.features.balena-api: '1'
 volumes:
   miner-storage:
   miner-log:
-  pktfwdr:
