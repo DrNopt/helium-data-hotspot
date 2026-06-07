@@ -1,6 +1,6 @@
 version: '2'
 services:
-packet-forwarder:
+  packet-forwarder:
     image: xoseperez/basicstation:latest
     depends_on:
       - helium-miner
@@ -22,6 +22,7 @@ packet-forwarder:
   helium-miner:
     build: ./hm-gatewayrs
     privileged: true
+    network_mode: host
     expose:
       - "1680"
     ports:
