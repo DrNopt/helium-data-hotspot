@@ -13,13 +13,8 @@ else
   exit 1
 fi
 
-# Always use file-based keypair for gateway-rs v1.3.0+
 echo "Using file-based keypair"
-echo '[keypair]' >> settings.toml
-echo 'type = "file"' >> settings.toml
-echo 'path = "/var/data/gateway_key.bin"' >> settings.toml
-
-
+echo 'keypair = "/var/data/gateway_key.bin"' >> settings.toml
 
 cat /etc/helium_gateway/settings.toml.template >> settings.toml
 cp settings.toml /etc/helium_gateway/settings.toml
