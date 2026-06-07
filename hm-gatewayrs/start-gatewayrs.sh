@@ -1,24 +1,23 @@
 #!/bin/bash
 echo "Starting start-gatewayrs.sh"
 
-echo "=== default.toml contents ==="
-cat /etc/helium_gateway/default.toml
-echo "=============================="
-
-rm -f /etc/helium_gateway/settings.toml
-
 echo "Setting REGION_OVERRIDE"
 if [[ -v REGION_OVERRIDE ]]
 then
   echo "REGION_OVERRIDE is set to ${REGION_OVERRIDE}"
-  echo 'region = "'"${REGION_OVERRIDE}\"" >> /etc/helium_gateway/settings.toml
 else
   echo "REGION_OVERRIDE not set"
   exit 1
 fi
 
 echo "Using file-based keypair"
-echo 'keypair = "/var/data/gateway_key.bin"' >> /etc/helium_gateway/settings.toml
+
+# Write only overrides to settings.toml - default.toml handles the rest
+cat > /etc/helium_gateway/settings.toml << EOF
+keypair = "/var/data/gateway_key.bin"
+region = "${REGION_OVERRIDE}"
+listen = "0.0.0.0:1680"
+EOF
 
 echo "=== settings.toml contents ==="
 cat /etc/helium_gateway/settings.toml
