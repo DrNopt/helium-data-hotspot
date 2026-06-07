@@ -7,11 +7,13 @@ services:
     restart: always
     privileged: true
     network_mode: host
+    volumes:
+      - ./reset.sh:/app/reset.sh.gpiod
     environment:
       - MODEL=RAK2287
       - INTERFACE=SPI
       - DEVICE=/dev/spidev0.0
-      - RESET_GPIO=25
+      - RESET_GPIO=17
       - GPIO_CHIP=gpiochip0
       - POWER_EN_GPIO=18
       - POWER_EN_LOGIC=1
