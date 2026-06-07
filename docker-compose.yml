@@ -29,7 +29,7 @@ services:
       - /dev/i2c-1:/dev/i2c-1
     restart: on-failure
     environment:
-      - RELEASE_BUMPER=foobar
+      - RELEASE_BUMPER=foobar2
       - FIRMWARE_VERSION=v1.0.0-alpha.21
     labels:
       io.balena.features.balena-api: '1'
