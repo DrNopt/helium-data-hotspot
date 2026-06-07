@@ -10,3 +10,7 @@ enabled = false
 
 [config]
 endpoint = "https://config.iot.mainnet.helium.io:6080"
+
+[[routers]]
+uri = "http://router.helium.io:8080"
+pubkey = "112qB3YaH5bZkCnKA5uRH7tBtGNv2Y5B4smv1jsmvGUzgKT71QpE"
