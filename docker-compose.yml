@@ -1,14 +1,12 @@
 version: '2'
 services:
-  packet-forwarder:
-    image: rakwireless/udp-packet-forwarder:latest
+ packet-forwarder:
+    build: ./hm-pktfwd2
     depends_on:
       - helium-miner
     restart: always
     privileged: true
     network_mode: host
-    volumes:
-      - ./reset.sh:/app/reset.sh.gpiod
     environment:
       - MODEL=RAK2287
       - INTERFACE=SPI
