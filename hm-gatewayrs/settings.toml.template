@@ -1,9 +1,5 @@
 listen = "0.0.0.0:1680"
 
-[keypair]
-type = "file"
-path = "/var/data/gateway_key.bin"
-
 [log]
 method = "stdio"
 level = "info"
