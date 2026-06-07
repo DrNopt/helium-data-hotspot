@@ -10,13 +10,28 @@ else
   exit 1
 fi
 
-echo "Using file-based keypair"
-
-# Write only overrides to settings.toml - default.toml handles the rest
+echo "Writing full settings.toml"
 cat > /etc/helium_gateway/settings.toml << EOF
 keypair = "/var/data/gateway_key.bin"
 region = "${REGION_OVERRIDE}"
 listen = "0.0.0.0:1680"
+api = 4467
+
+[log]
+level = "info"
+timestamp = false
+
+[poc]
+entropy_uri = "http://entropy.iot.mainnet.helium.io:7080"
+ingest_uri = "http://mainnet-pociot.helium.io:9080"
+
+[config]
+pubkey = "137oJzq1qZpSbzHawaysTGGsRCYTXG1MiTMQNxYSsQJp4YMDdN8"
+uri = "http://mainnet-config.helium.io:6080/"
+
+[router]
+uri = "http://mainnet-router.helium.io:8080/"
+queue = 20
 EOF
 
 echo "=== settings.toml contents ==="
