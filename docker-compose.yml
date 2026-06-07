@@ -8,10 +8,12 @@ services:
     privileged: true
     volumes:
       - pktfwdr:/var/pktfwd
+      - /sys:/sys
     devices:
       - /dev/spidev0.0:/dev/spidev0.0
       - /dev/spidev0.1:/dev/spidev0.1
       - /dev/gpiomem:/dev/gpiomem
+      - /dev/gpiochip0:/dev/gpiochip0
     environment:
       - FIRMWARE_VERSION=v1.0.0-alpha.21
   helium-miner:
@@ -38,3 +40,4 @@ services:
 volumes:
   miner-storage:
   miner-log:
+  pktfwdr:
