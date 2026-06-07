@@ -1,6 +1,6 @@
 version: '2'
 services:
- packet-forwarder:
+  packet-forwarder:
     build: ./hm-pktfwd2
     depends_on:
       - helium-miner
@@ -31,7 +31,7 @@ services:
       - /dev/i2c-1:/dev/i2c-1
     restart: on-failure
     environment:
-      - RELEASE_BUMPER=foobar5
+      - RELEASE_BUMPER=foobar6
       - FIRMWARE_VERSION=v1.0.0-alpha.21
     labels:
       io.balena.features.balena-api: '1'
