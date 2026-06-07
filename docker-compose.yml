@@ -1,5 +1,4 @@
 version: '2'
-
 services:
   packet-forwarder:
     build: ./hm-pktfwd
@@ -9,9 +8,12 @@ services:
     privileged: true
     volumes:
       - pktfwdr:/var/pktfwd
+    devices:
+      - /dev/spidev0.0:/dev/spidev0.0
+      - /dev/spidev0.1:/dev/spidev0.1
+      - /dev/gpiomem:/dev/gpiomem
     environment:
       - FIRMWARE_VERSION=v1.0.0-alpha.21
-
   helium-miner:
     build: ./hm-gatewayrs
     privileged: true
@@ -33,8 +35,6 @@ services:
       - FIRMWARE_VERSION=v1.0.0-alpha.21
     labels:
       io.balena.features.balena-api: '1'
-
 volumes:
   miner-storage:
   miner-log:
-  pktfwdr:
