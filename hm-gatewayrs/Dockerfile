@@ -24,8 +24,8 @@ RUN \
         rm -rf /var/lib/apt/lists/*
 
 # Download and install helium gateway-rs
-RUN wget https://github.com/helium/gateway-rs/releases/download/"$GATEWAY_RS_RELEASE"/helium-gateway-"$GATEWAY_RS_RELEASE"-aarch64-unknown-linux-musl.tar.gz && \
-    tar -xzf helium-gateway-"$GATEWAY_RS_RELEASE"-aarch64-unknown-linux-musl.tar.gz && \
+RUN wget https://github.com/helium/gateway-rs/releases/download/"$GATEWAY_RS_RELEASE"/helium-gateway-"${GATEWAY_RS_RELEASE#v}"-aarch64-unknown-linux-musl.tar.gz && \
+    tar -xzf helium-gateway-"${GATEWAY_RS_RELEASE#v}"-aarch64-unknown-linux-musl.tar.gz && \
     mv helium_gateway /usr/bin/helium_gateway && \
     rm helium-gateway-*.tar.gz
 
