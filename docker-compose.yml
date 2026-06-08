@@ -1,7 +1,7 @@
 version: '2'
 services:
   gateway-config:
-    image: ghcr.io/nebraltd/hm-pktfwd:b9c38d4
+    image: nebraltd/hm-pktfwd:5c3c90a
     depends_on:
       - dbus-session
       - helium-miner
