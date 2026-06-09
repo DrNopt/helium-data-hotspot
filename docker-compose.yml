@@ -32,7 +32,6 @@ services:
     privileged: true
     volumes:
       - pktfwdr:/var/pktfwd
-      - nebra:/var/nebra
     environment:
       - FIRMWARE_VERSION=v1.3.2
       - FIRMWARE_SHORT_HASH=5f423f8
@@ -115,3 +114,5 @@ volumes:
   miner-storage:
   pktfwdr:
   dbus:
+  nebra:
+  watchdog-log:
