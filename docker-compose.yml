@@ -1,7 +1,7 @@
 version: '2'
 services:
   gateway-config:
-    image: nebraltd/hm-pktfwd:5c3c90a
+    image: nebraltd/hm-config:arm64-a198b83
     depends_on:
       - dbus-session
       - helium-miner
@@ -25,7 +25,7 @@ services:
       io.balena.features.dbus: 1
     stop_signal: SIGINT
   packet-forwarder:
-    image: nebraltd/hm-pktfwd:5c3c90a
+    build: ./hm-pktfwd2
     depends_on:
       - multiplexer
     restart: always
@@ -115,5 +115,3 @@ volumes:
   miner-storage:
   pktfwdr:
   dbus:
-  nebra:
-  watchdog-log:
